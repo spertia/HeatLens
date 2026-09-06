@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeatLens | Local Heat Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+       <!-- Header -->
+        <header class="top-nav">
+            <div class="logo">
+                <h1>HeatLens<span>.</span></h1>
+                <p>Local Heat Intelligence & Intervention Simulator</p>
+            </div>
+            <div class="disclaimer-badge">Prototype Mode</div>
+        </header>
+
+        <!-- layout -->
+        <main class="dashboard">
+            
+            <!-- controls/interventions -->
+            <section class="panel controls-panel">
+                <h2>Parameters</h2>
+                
+                <div class="control-group">
+                    <label for="location-select">Select Geolocation Area</label>
+                    <select id="location-select">
+                        <option value="dense-urban">Dense Urban Center (High Build, Low Green)</option>
+                        <option value="industrial">Industrial Zone (High Pavement, Metal Roofs)</option>
+                        <option value="suburban">Suburban Residential (Medium Build, Moderate Green)</option>
+                    </select>
+                </div>
+
+                <div class="control-group interventions">
+                    <h3>Simulate Interventions</h3>
+                    
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-trees" class="intervention-toggle" value="trees">
+                        <span class="slider"></span>
+                        <span class="label-text">Plant Urban Canopy (Trees)</span>
+                    </label>
+
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-shade" class="intervention-toggle" value="shade">
+                        <span class="slider"></span>
+                        <span class="label-text">Install Shade Structures</span>
+                    </label>
+
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-reflect" class="intervention-toggle" value="reflect">
+                        <span class="slider"></span>
+                        <span class="label-text">High-Albedo (Reflective) Surfaces</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- metrics/map -->
+            <section class="panel visual-panel">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>Estimated Ground Temp</h3>
+                        <div class="metric-value" id="temp-display">--°C</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Overall Heat Risk</h3>
+                        <div class="metric-value risk-badge" id="risk-display">--</div>
+                    </div>
+                </div>
+
+                <div class="map-simulation">
+                    <div class="heat-overlay" id="heat-map"></div>
+                    <p class="map-label">Geographic Information System (GIS) Visualizer</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
