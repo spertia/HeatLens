@@ -2,18 +2,21 @@
    Variables / Design
    ========================================================================== */
 :root {
-    --bg-main: #0f172a;
-    --bg-panel: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #3b82f6;
-    --border: #334155;
+    --bg-main: #dfe3dd;
+    --bg-panel: #eef1ea;
+    --text-main: #1c231f;
+    --text-muted: #4c554e;
+    --line: #b7bfb3;
+    --line-soft: #ccd2c6;
     
     /* Risk Status Colors */
-    --risk-extreme: #ef4444;
-    --risk-high: #f97316;
-    --risk-moderate: #eab308;
-    --risk-low: #22c55e;
+    --risk-extreme: #7a1e1e;
+    --risk-high: #c1440e;
+    --risk-moderate: #a68a2c;
+    --risk-low: #3e7c6c;
+
+   --font-display: 'Space Grotesk', sans-serif;
+   --font-mono: 'JetBrains Mono', monospace;
 }
 
 /* ==========================================================================
@@ -29,6 +32,8 @@
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
+   font-family: var(--font-display);
+   -webkit-font-smoothing: antialiased;
     line-height: 1.6;
 }
 
