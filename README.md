@@ -27,7 +27,8 @@ This is not a live health warning system, and should not be used for decisions r
   
 ### Locally Ran:  
 No installation needed  
-Open index.html in browser  
+Place all three files into one folder
+Open index.html through browser  
   
 ### Suggested improvements:  
 1.) Implement real weather and satellite data  
