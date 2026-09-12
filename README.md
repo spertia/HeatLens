@@ -27,7 +27,7 @@ This is not a live health warning system, and should not be used for decisions r
   
 ### Locally Ran:  
 No installation needed  
-Place all three files into one folder
+Place all three files into one folder   
 Open index.html through browser  
   
 ### Suggested improvements:  
