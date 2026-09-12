@@ -1,85 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HeatLens | Local Heat Intelligence</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeatLens — Local Heat Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="app-container">
-       <!-- Header -->
-        <header class="top-nav">
-            <div class="logo">
-                <h1>HeatLens<span></span></h1>
-                <p>Local Heat Intelligence & Intervention (Simulator)</p>
-            </div>
-            <div class="disclaimer-badge">Demonstrative Build Only</div>
-        </header>
+<div class="app">
 
-        <!-- layout -->
-        <main class="dashboard">
-            
-            <!-- controls/interventions -->
-            <section class="panel controls-panel">
-                <h2>Parameters</h2>
-                
-                <div class="control-group">
-                    <label for="location-select">Select Geolocation Area</label>
-                    <select id="location-select">
-                        <option value="dense-urban">Dense Urban Center (High Buildings, Low Forestry)</option>
-                        <option value="industrial">Industrial Zone (High Pavement, Metal Roofing)</option>
-                        <option value="suburban">Suburban Residential (Medium Buildings, Moderate Forestry)</option>
-                    </select>
-                </div>
-
-                <div class="control-group interventions">
-                    <h3>Simulate Interventions</h3>
-                    
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="toggle-trees" class="intervention-toggle" value="trees">
-                        <span class="slider"></span>
-                        <span class="label-text">Plant Urban Forestry (Trees)</span>
-                    </label>
-
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="toggle-shade" class="intervention-toggle" value="shade">
-                        <span class="slider"></span>
-                        <span class="label-text">Install Shade Structures</span>
-                    </label>
-
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="toggle-reflect" class="intervention-toggle" value="reflect">
-                        <span class="slider"></span>
-                        <span class="label-text">High-Albedo (Reflective) Surfaces</span>
-                    </label>
-                </div>
-            </section>
-
-            <!-- metrics/map -->
-            <section class="panel visual-panel">
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h3>Estimated Ground Temp</h3>
-                        <div class="metric-value" id="temp-display">--°C</div>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Overall Heat Risk</h3>
-                        <div class="metric-value risk-badge" id="risk-display">--</div>
-                    </div>
-                </div>
-
-                <div class="map-simulation">
-                    <div class="heat-overlay" id="heat-map"></div>
-                    <p class="map-label">Geographic Information System (GIS) Visualizer</p>
-                </div>
-            </section>
-
-        </main>
+  <header class="masthead">
+    <div class="masthead-title">
+      <h1>HeatLens</h1>
+      <p>Local heat intelligence &amp; intervention simulator</p>
     </div>
+    <span class="build-tag">prototype build</span>
+  </header>
 
-    <script src="app.js"></script>
+  <main class="console">
+
+    <!-- left: parameters -->
+    <section class="rail" aria-label="Simulation parameters">
+
+      <div class="rail-block">
+        <label class="rail-label" for="location-select">Area</label>
+        <select id="location-select">
+          <option value="dense-urban" selected>Dense urban center</option>
+          <option value="industrial">Industrial zone</option>
+          <option value="suburban">Suburban residential</option>
+        </select>
+        <p class="rail-hint" id="location-hint">High building density, low tree cover.</p>
+      </div>
+
+      <div class="rail-block">
+        <span class="rail-label">Time of day</span>
+        <div class="segmented" role="radiogroup" aria-label="Time of day">
+          <button type="button" class="seg-option" data-time="morning">Morning</button>
+          <button type="button" class="seg-option is-active" data-time="midday">Midday</button>
+          <button type="button" class="seg-option" data-time="peak">Afternoon peak</button>
+        </div>
+      </div>
+
+      <div class="rail-block">
+        <span class="rail-label">Interventions</span>
+
+        <label class="toggle-row">
+          <span>Plant urban canopy (trees)</span>
+          <span class="toggle-switch">
+            <input type="checkbox" id="toggle-trees" value="trees">
+            <span class="track"><span class="thumb"></span></span>
+          </span>
+        </label>
+
+        <label class="toggle-row">
+          <span>Install shade structures</span>
+          <span class="toggle-switch">
+            <input type="checkbox" id="toggle-shade" value="shade">
+            <span class="track"><span class="thumb"></span></span>
+          </span>
+        </label>
+
+        <label class="toggle-row">
+          <span>High-albedo (reflective) surfaces</span>
+          <span class="toggle-switch">
+            <input type="checkbox" id="toggle-reflect" value="reflect">
+            <span class="track"><span class="thumb"></span></span>
+          </span>
+        </label>
+      </div>
+
+      <div class="rail-block rail-block-model">
+        <span class="rail-label">Model basis</span>
+        <p class="model-note">Surface temperature is estimated from ambient air temperature, material heat absorption, sun angle, and the shading or reflectivity introduced by each intervention. Values are illustrative, not measured.</p>
+      </div>
+
+    </section>
+
+    <!-- right: readout + map -->
+    <section class="readout" aria-label="Heat readout">
+
+      <div class="stat-strip">
+        <div class="stat">
+          <span class="stat-label">Hottest surface</span>
+          <span class="stat-value" id="temp-display">--°C</span>
+          <span class="stat-sub" id="temp-zone-sub">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Heat risk</span>
+          <span class="stat-value" id="risk-display">--</span>
+          <span class="stat-sub" id="risk-sub">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Change vs. no intervention</span>
+          <span class="stat-value" id="delta-display">--</span>
+          <span class="stat-sub" id="delta-sub">—</span>
+        </div>
+      </div>
+
+      <div class="map-frame">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+        <p class="map-caption">Site plan — surface temperature by material</p>
+        <svg id="site-map" viewBox="0 0 400 300" role="img" aria-label="Diagram of a city block showing surface temperature by zone">
+          <!-- populated by app.js -->
+        </svg>
+      </div>
+
+      <div class="legend" id="legend"></div>
+
+      <div class="notes" id="field-notes">
+        <p id="field-notes-text">Select an area to run the model.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>CSH Social Impact Ideathon 2026 — AI track</span>
+    <span>Simulated data, no live sensors connected</span>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
